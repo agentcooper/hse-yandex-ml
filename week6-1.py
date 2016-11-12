@@ -18,17 +18,8 @@ def getClusteredImages(X, cluster_labels):
     for k in range(0, n_clusters):
         kth_cluster = [i for i, v in enumerate(cluster_labels) if v == k]
 
-        kth_cluster_median = [
-            np.median([X[i][0] for i in kth_cluster]),
-            np.median([X[i][1] for i in kth_cluster]),
-            np.median([X[i][2] for i in kth_cluster])
-        ]
-
-        kth_cluster_average = [
-            np.average([X[i][0] for i in kth_cluster]),
-            np.average([X[i][1] for i in kth_cluster]),
-            np.average([X[i][2] for i in kth_cluster])
-        ]
+        kth_cluster_median = np.median([X[i] for i in kth_cluster], axis=0)
+        kth_cluster_average = np.average([X[i] for i in kth_cluster], axis=0)
 
         for i in kth_cluster:
             X_median[i] = kth_cluster_median
