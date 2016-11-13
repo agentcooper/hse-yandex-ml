@@ -16,13 +16,12 @@ def getClusteredImages(original_image, cluster_labels):
     X_average = np.zeros_like(original_image);
 
     for k in range(0, n_clusters):
-        kth_cluster = [i for i, v in enumerate(cluster_labels) if v == k]
-        kth_cluster_original = [original_image[i] for i in kth_cluster]
+        kth_cluster_indeces = np.array([i for i, v in enumerate(cluster_labels) if v == k])
 
-        kth_cluster_median = np.median(kth_cluster_original, axis=0)
-        kth_cluster_average = np.average(kth_cluster_original, axis=0)
+        kth_cluster_median = np.median(original_image[kth_cluster_indeces], axis=0)
+        kth_cluster_average = np.average(original_image[kth_cluster_indeces], axis=0)
 
-        for i in kth_cluster:
+        for i in kth_cluster_indeces:
             X_median[i] = kth_cluster_median
             X_average[i] = kth_cluster_average
 
